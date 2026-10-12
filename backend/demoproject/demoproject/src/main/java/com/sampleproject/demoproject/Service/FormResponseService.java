@@ -39,11 +39,6 @@ public class FormResponseService {
             MultipartFile file
     ) throws IOException {
 
-
-        // =========================================
-        // UPLOAD DIRECTORY
-        // =========================================
-
         Path uploadDirectory =
                 Paths.get("uploads");
 
@@ -52,19 +47,10 @@ public class FormResponseService {
                 uploadDirectory
         );
 
-
-        // =========================================
-        // GENERATE UNIQUE FILE ID
-        // =========================================
-
         String fileId =
                 UUID.randomUUID()
                         .toString();
 
-
-        // =========================================
-        // GET ORIGINAL EXTENSION
-        // =========================================
 
         String originalFileName =
                 file.getOriginalFilename();
@@ -85,11 +71,6 @@ public class FormResponseService {
                     );
         }
 
-
-        // =========================================
-        // SERVER FILE NAME
-        // =========================================
-
         String serverFileName =
                 fileId + extension;
 
@@ -99,10 +80,6 @@ public class FormResponseService {
                         serverFileName
                 );
 
-
-        // =========================================
-        // SAVE ACTUAL FILE
-        // =========================================
 
         Files.copy(
                 file.getInputStream(),
@@ -127,11 +104,6 @@ public class FormResponseService {
             List<MultipartFile> files
     ) throws Exception {
 
-
-        // =============================================
-        // 1. CHECK FORM
-        // =============================================
-
         formRepository
                 .findById(formId)
                 .orElseThrow(() ->
@@ -141,10 +113,6 @@ public class FormResponseService {
                         )
                 );
 
-
-        // =============================================
-        // 2. SAVE FILES
-        // =============================================
 
         List<String> fileIds =
                 new ArrayList<>();
@@ -172,11 +140,6 @@ public class FormResponseService {
             }
         }
 
-
-        // =============================================
-        // 3. SAVE RESPONSE
-        // =============================================
-
         System.out.println(
                 "FORM ID: "
                         + formId
@@ -191,13 +154,6 @@ public class FormResponseService {
                 "FILE IDS: "
                         + fileIds
         );
-
-
-        /*
-         * Here you can use your existing
-         * MySQL/PostgreSQL/H2/MongoDB
-         * response-saving logic.
-         */
 
 
         return "Response saved successfully. "

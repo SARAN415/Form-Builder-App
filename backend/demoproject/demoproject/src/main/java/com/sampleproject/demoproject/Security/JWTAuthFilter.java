@@ -38,8 +38,6 @@ public class JWTAuthFilter
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-
-        // Allow CORS preflight
         if ("OPTIONS".equalsIgnoreCase(
                 request.getMethod()
         )) {

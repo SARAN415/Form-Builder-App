@@ -7,6 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FormRepository extends JpaRepository<Form, String> {
-    //List<Form> findAllByOrderByUpdatedAtDesc();
     Optional<Form> findByPublicToken(String publicToken);
 }

@@ -61,88 +61,6 @@ public class FormController {
         this.formLinkFileService=formLinkFileService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<Form> createForm(
-//            @RequestBody CreateFormRequest request
-//    ) {
-//
-//        // 1. Generate Form ID
-//
-//        String formId =
-//                UUID.randomUUID()
-//                        .toString()
-//                        .substring(0, 8);
-//
-//
-//        // 2. Create Form
-//
-//        Form form =
-//                new Form(formId);
-//
-//
-//        // 3. Save Form
-//
-//        Form savedForm =
-//                formRepository.save(form);
-//
-//
-//        // 4. Get database configuration
-//
-//        DatabaseConfig db =
-//                request.getDatabase();
-//
-//        System.out.println("Database config db: "+db);
-//
-//
-//        // 5. Create database configuration
-//
-//        FormDatabaseConfig config =
-//                new FormDatabaseConfig();
-//
-//
-//        config.setId(
-//                UUID.randomUUID().toString().substring(0, 8)
-//        );
-//
-//        config.setFormId(
-//                savedForm.getId()
-//        );
-//
-//        config.setDatabaseType(db.getDatabaseType());
-//
-//        config.setUrl(
-//                db.getUrl()
-//        );
-//
-//        config.setDriverClassName(
-//                db.getDriverClassName()
-//        );
-//
-//        config.setDatabaseName(db.getDatabaseName());
-//
-//        config.setUsername(
-//                db.getUsername()
-//        );
-//
-//        config.setPassword(
-//                db.getPassword()
-//        );
-//
-//
-//        // 6. Save configuration
-//
-//        formDatabaseConfigRepository.save(
-//                config
-//        );
-//
-//
-//        // 7. Return Form ID
-//
-//        return ResponseEntity.ok(
-//                savedForm
-//        );
-//    }
-
     @PostMapping
     public ResponseEntity<?> createForm(
             @RequestBody CreateFormRequest request
@@ -159,14 +77,12 @@ public class FormController {
                     new Form(formId);
 
 
-            // Generate PUBLIC TOKEN
             String publicToken =
                     PublicTokenGenerator.generate();
 
             formTable.setPublicToken(publicToken);
             formTable.setFormData(request.getFormData());
 
-            // Save form
             Form savedForm =
                     formRepository.save(formTable);
 
@@ -207,9 +123,6 @@ public class FormController {
                     db.getPassword()
             );
 
-
-            // 6. Save configuration
-
             formDatabaseConfigRepository.save(
                     config
             );
@@ -225,18 +138,6 @@ public class FormController {
                     .body("Failed to create form");
         }
     }
-
-
-//    public Form createForm() {
-//
-//        String id = UUID.randomUUID()
-//                .toString()
-//                .substring(0, 8);
-//
-//        Form form = new Form(id);
-//
-//        return formRepository.save(form);
-//    }
 
     @GetMapping("/{id}")
     public Form getForm(@PathVariable String id) {
@@ -297,18 +198,9 @@ public class FormController {
 
         try {
 
-            // =========================================
-            // 1. Load JDBC driver
-            // =========================================
-
             Class.forName(
                     config.getDriverClassName()
             );
-
-
-            // =========================================
-            // 2. Connect to configured database
-            // =========================================
 
             try (
                     Connection connection =
@@ -323,11 +215,6 @@ public class FormController {
                         "Connected to database: "
                                 + config.getDatabaseType()
                 );
-
-
-                // =========================================
-                // 3. Create Form table
-                // =========================================
 
                 String createFormTableSql = """
                     CREATE TABLE IF NOT EXISTS Form (
@@ -346,11 +233,6 @@ public class FormController {
                             createFormTableSql
                     );
                 }
-
-
-                // =========================================
-                // 4. Create Form_Database_Config table
-                // =========================================
 
                 String createConfigTableSql = """
                     CREATE TABLE IF NOT EXISTS Form_Database_Config (
@@ -375,11 +257,6 @@ public class FormController {
                             createConfigTableSql
                     );
                 }
-
-
-                // =========================================
-                // 5. Insert Form
-                // =========================================
 
                 String insertFormSql =
                         """
@@ -408,18 +285,8 @@ public class FormController {
                             )
                     );
 
-//                    statement.setString(
-//                            3,
-//                            answers
-//                    );
-
                     statement.executeUpdate();
                 }
-
-
-                // =========================================
-                // 6. Insert database configuration
-                // =========================================
 
                 String insertConfigSql =
                         """
@@ -516,18 +383,9 @@ public class FormController {
 
         try {
 
-            // =========================================
-            // 1. Load JDBC driver
-            // =========================================
-
             Class.forName(
                     config.getDriverClassName()
             );
-
-
-            // =========================================
-            // 2. Connect to configured database
-            // =========================================
 
             try (
                     Connection connection =
@@ -543,20 +401,11 @@ public class FormController {
                                 + config.getDatabaseType()
                 );
 
-
-                // =========================================
-                // 3. Create table name
-                // =========================================
-
                 String tableName =
                         "Form_"
                                 + formId
                                 + "_Responses";
 
-
-                // =========================================
-                // 4. Parse answers JSON
-                // =========================================
 
                 ObjectMapper objectMapper =
                         new ObjectMapper();
@@ -565,11 +414,6 @@ public class FormController {
                         objectMapper.readTree(
                                 answers
                         );
-
-
-                // =========================================
-                // 5. Create response table
-                // =========================================
 
                 String createTableSql =
                         "CREATE TABLE IF NOT EXISTS `"
@@ -590,11 +434,6 @@ public class FormController {
                     );
                 }
 
-
-                // =========================================
-                // 6. Add dynamic columns
-                // =========================================
-
                 for (
                         Map.Entry<String, JsonNode> entry :
                         answersJson.properties()
@@ -603,18 +442,11 @@ public class FormController {
                     String fieldName =
                             entry.getKey();
 
-
-                    // Escape backticks
                     String columnName =
                             fieldName.replace(
                                     "`",
                                     "``"
                             );
-
-
-                    // =====================================
-                    // Check whether column exists
-                    // =====================================
 
                     String checkColumnSql =
                             "SELECT COUNT(*) "
@@ -658,11 +490,6 @@ public class FormController {
                         }
                     }
 
-
-                    // =====================================
-                    // Add column if not exists
-                    // =====================================
-
                     if (!columnExists) {
 
                         String alterTableSql =
@@ -685,25 +512,14 @@ public class FormController {
                     }
                 }
 
-
-                // =========================================
-                // 7. Prepare INSERT columns
-                // =========================================
-
                 List<String> columns =
                         new ArrayList<>();
 
                 List<String> placeholders =
                         new ArrayList<>();
 
-
-                // ID
-
                 columns.add("`id`");
                 placeholders.add("?");
-
-
-                // Dynamic fields
 
                 for (
                         Map.Entry<String, JsonNode> entry :
@@ -729,19 +545,12 @@ public class FormController {
                     placeholders.add("?");
                 }
 
-
-                // Submitted time
-
                 columns.add(
                         "`submitted_at`"
                 );
 
                 placeholders.add("?");
 
-
-                // =========================================
-                // 8. Create INSERT SQL
-                // =========================================
 
                 String insertResponseSql =
                         "INSERT INTO `"
@@ -759,10 +568,6 @@ public class FormController {
                                 + ")";
 
 
-                // =========================================
-                // 9. Insert response
-                // =========================================
-
                 try (
                         PreparedStatement statement =
                                 connection.prepareStatement(
@@ -772,21 +577,11 @@ public class FormController {
 
                     int parameterIndex = 1;
 
-
-                    // =====================================
-                    // Response ID
-                    // =====================================
-
                     statement.setString(
                             parameterIndex++,
                             UUID.randomUUID()
                                     .toString()
                     );
-
-
-                    // =====================================
-                    // Dynamic values
-                    // =====================================
 
                     for (
                             Map.Entry<String, JsonNode> entry :
@@ -799,9 +594,6 @@ public class FormController {
 
                         String valueString;
 
-
-                        // Object / File
-
                         if (value.isObject()) {
 
                             valueString =
@@ -812,8 +604,6 @@ public class FormController {
 
                         }
 
-                        // Array
-
                         else if (value.isArray()) {
 
                             valueString =
@@ -823,8 +613,6 @@ public class FormController {
                                             );
 
                         }
-
-                        // Normal value
 
                         else {
 
@@ -839,22 +627,12 @@ public class FormController {
                         );
                     }
 
-
-                    // =====================================
-                    // Submitted time
-                    // =====================================
-
                     statement.setTimestamp(
                             parameterIndex,
                             Timestamp.valueOf(
                                     LocalDateTime.now()
                             )
                     );
-
-
-                    // =====================================
-                    // Execute INSERT
-                    // =====================================
 
                     statement.executeUpdate();
 
@@ -914,19 +692,12 @@ public class FormController {
                         )
         ) {
 
-            // =========================================
-            // Get database
-            // =========================================
 
             MongoDatabase database =
                     mongoClient.getDatabase(
                             config.getDatabaseName()
                     );
 
-
-            // =========================================
-            // Collection
-            // =========================================
 
             String collectionName =
                     "form_"
@@ -941,30 +712,16 @@ public class FormController {
                     );
 
 
-            // =========================================
-            // Parse answers JSON
-            // =========================================
-
             Document answerDocument =
                     Document.parse(
                             answers
                     );
-
-
-            // =========================================
-            // Add response ID
-            // =========================================
 
             answerDocument.put(
                     "_id",
                     UUID.randomUUID()
                             .toString()
             );
-
-
-            // =========================================
-            // Insert
-            // =========================================
 
             collection.insertOne(
                     answerDocument
@@ -1034,8 +791,6 @@ public class FormController {
                             file.getSize()
                     );
 
-
-                    // Use the actual form field label
                     answerData.put(
                             label,
                             fileData
@@ -1049,12 +804,6 @@ public class FormController {
                                     answerData
                             );
 
-//            String result =
-//                    formResponseService.saveResponse(
-//                            formId,
-//                            answers,
-//                            files
-//                    );
 
             // 1. Check whether form exists
             Form form=formRepository
@@ -1093,11 +842,6 @@ public class FormController {
                 );
             }
 
-
-            // =================================================
-            // SQL DATABASES
-            // =================================================
-
             if (
                     databaseType.equalsIgnoreCase("MYSQL") ||
                             databaseType.equalsIgnoreCase("POSTGRESQL") ||
@@ -1112,11 +856,6 @@ public class FormController {
 
             }
 
-
-            // =================================================
-            // MONGODB
-            // =================================================
-
             else if (
                     databaseType.equalsIgnoreCase("MONGODB")
             ) {
@@ -1128,11 +867,6 @@ public class FormController {
                 );
 
             }
-
-
-            // =================================================
-            // UNSUPPORTED DATABASE
-            // =================================================
 
             else {
 
@@ -1160,45 +894,18 @@ public class FormController {
                     );
         }
     }
-//    public FormResponse saveResponse(
-//            @PathVariable String formId,
-//            @RequestBody String answers) {
-//
-//        // Check whether form exists
-//        formRepository
-//                .findById(formId)
-//                .orElseThrow(() ->
-//                        new RuntimeException(
-//                                "Form not found: " + formId
-//                        )
-//                );
-//
-//        FormResponse response =
-//                new FormResponse();
-//
-//        response.setFormId(formId);
-//        response.setAnswers(answers);
-//
-//        return responseRepository.save(response);
-//    }
 
     @GetMapping("/files")
     public ResponseEntity<List<Map<String, Object>>> getAllFiles() {
 
         try {
-//            System.out.println("Files Uploading");
 
             List<Map<String, Object>> result =
                     new ArrayList<>();
 
 
-            // Get all forms that have database configuration
             List<FormDatabaseConfig> configs =
                     formDatabaseConfigRepository.findAll();
-
-//            System.out.println(
-//                    "CONFIG COUNT = " + configs.size()
-//            );
 
 
             for (FormDatabaseConfig config : configs) {
@@ -1261,10 +968,6 @@ public class FormController {
                                 }
 
 
-                                // =================================
-                                // Extract formId
-                                // =================================
-
                                 String formId =
                                         tableName.substring(
                                                 5,
@@ -1272,10 +975,6 @@ public class FormController {
                                                         - 10
                                         );
 
-
-                                // =================================
-                                // Get columns
-                                // =================================
 
                                 List<String> columns =
                                         new ArrayList<>();
@@ -1313,11 +1012,6 @@ public class FormController {
                                         }
                                     }
                                 }
-
-
-                                // =================================
-                                // Read response rows
-                                // =================================
 
                                 String sql =
                                         "SELECT * FROM "
@@ -1360,11 +1054,6 @@ public class FormController {
                                             ) {
                                                 continue;
                                             }
-
-
-                                            // =================================
-                                            // Check if JSON contains fileId
-                                            // =================================
 
                                             try {
 
@@ -1430,7 +1119,6 @@ public class FormController {
                                                             file.get("size")
                                                     );
 
-                                                    // File1 / File 2
                                                     fileInfo.put(
                                                             "label",
                                                             label
@@ -1442,66 +1130,6 @@ public class FormController {
                                                 }
 
 
-                                                // =================================
-                                                // Create file object
-                                                // =================================
-
-//                                                Map<String, Object>
-//                                                        file =
-//                                                        new HashMap<>();
-//
-//
-//                                                file.put(
-//                                                        "formId",
-//                                                        formId
-//                                                );
-//
-//                                                file.put(
-//                                                        "fileId",
-//                                                        fileData.get(
-//                                                                "fileId"
-//                                                        )
-//                                                );
-//
-//                                                file.put(
-//                                                        "fileName",
-//                                                        fileData.get(
-//                                                                "fileName"
-//                                                        )
-//                                                );
-//
-//                                                file.put(
-//                                                        "contentType",
-//                                                        fileData.get(
-//                                                                "contentType"
-//                                                        )
-//                                                );
-//
-//                                                file.put(
-//                                                        "size",
-//                                                        fileData.get(
-//                                                                "size"
-//                                                        )
-//                                                );
-//
-//                                                file.put(
-//                                                        "label",
-//                                                        column
-//                                                );
-//
-//
-//                                                result.add(
-//                                                        file
-//                                                );
-
-//                                                System.out.println("Files successfully uploaded");
-
-
-                                            } catch (
-                                                    Exception ignored
-                                            ) {
-
-                                                // Not a file field
                                             }
                                         }
                                     }

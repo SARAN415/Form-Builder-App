@@ -35,10 +35,6 @@ public class AuthService {
     private JWTService jwtService;
 
 
-    // =================================================
-    // SIGNUP
-    // =================================================
-
     public Map<String, Object> signup(
             SignupRequest request
     ) {
@@ -107,11 +103,6 @@ public class AuthService {
         return response;
     }
 
-
-    // =================================================
-    // LOGIN
-    // =================================================
-
     public Map<String, Object> login(
             LoginRequest request
     ) {
@@ -141,8 +132,6 @@ public class AuthService {
             );
         }
 
-
-        // Generate OTP
 
         String otp =
                 generateOtp();
@@ -185,10 +174,6 @@ public class AuthService {
         return response;
     }
 
-
-    // =================================================
-    // VERIFY OTP
-    // =================================================
 
     public Map<String, Object> verifyOtp(
             OTPRequest request
@@ -301,10 +286,6 @@ public class AuthService {
     }
 
 
-    // =================================================
-    // RESEND OTP
-    // =================================================
-
     public Map<String, Object> resendOtp(
             String email
     ) {
@@ -356,10 +337,6 @@ public class AuthService {
         return response;
     }
 
-
-    // =================================================
-    // GENERATE OTP
-    // =================================================
 
     private String generateOtp() {
 

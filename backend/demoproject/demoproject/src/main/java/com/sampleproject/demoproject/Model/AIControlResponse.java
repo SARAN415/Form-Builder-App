@@ -16,11 +16,6 @@ public class AIControlResponse {
     public AIControlResponse() {
     }
 
-
-    // =========================
-    // ACTION
-    // =========================
-
     public String getAction() {
         return action;
     }
@@ -28,11 +23,6 @@ public class AIControlResponse {
     public void setAction(String action) {
         this.action = action;
     }
-
-
-    // =========================
-    // CONTROLS
-    // =========================
 
     public List<AIControl> getControls() {
         return controls;
@@ -43,10 +33,6 @@ public class AIControlResponse {
     }
 
 
-    // =========================
-    // SELECTED ID
-    // =========================
-
     public Long getSelectedId() {
         return selectedId;
     }
@@ -55,10 +41,6 @@ public class AIControlResponse {
         this.selectedId = selectedId;
     }
 
-
-    // =========================
-    // AI CONTROL
-    // =========================
 
     public static class AIControl {
 

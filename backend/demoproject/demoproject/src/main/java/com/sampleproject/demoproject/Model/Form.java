@@ -14,9 +14,6 @@ public class Form {
     @Id
     private String id;
 
-//    @Column(name = "name")
-//    private String name;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 

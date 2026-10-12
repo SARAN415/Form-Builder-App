@@ -17,10 +17,6 @@ public class FormLinkFileService {
     private final String frontendUrl =
             "http://localhost:3000";
 
-    // ============================================
-    // CREATE LINK FILE
-    // ============================================
-
     public String createLinkFile(
             String formId,
             String publicLink
@@ -39,10 +35,6 @@ public class FormLinkFileService {
 
         return publicLink;
     }
-
-    // ============================================
-    // READ LINK FILE
-    // ============================================
 
     public String readLinkFile(String formId)
             throws IOException {

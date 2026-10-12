@@ -51,11 +51,6 @@ public class FormAIActionService {
                 databaseConfigRepository;
     }
 
-
-    // =========================================================
-    // FIND FORM
-    // =========================================================
-
     private Form getForm(String formId) {
 
         return formRepository.findById(formId)
@@ -65,11 +60,6 @@ public class FormAIActionService {
                         )
                 );
     }
-
-
-    // =========================================================
-    // FIND CONTROLS
-    // =========================================================
 
     private ArrayNode getControls(
             ObjectNode root
@@ -88,11 +78,6 @@ public class FormAIActionService {
 
         return (ArrayNode) controlsNode;
     }
-
-
-    // =========================================================
-    // FIND CONTROL
-    // =========================================================
 
     private ObjectNode findControl(
             ArrayNode controls,
@@ -119,11 +104,6 @@ public class FormAIActionService {
         );
     }
 
-
-    // =========================================================
-    // SAVE FORM
-    // =========================================================
-
     private void saveForm(
             Form form,
             ObjectNode root
@@ -135,11 +115,6 @@ public class FormAIActionService {
 
         formRepository.save(form);
     }
-
-
-    // =========================================================
-    // MOVE CONTROL
-    // =========================================================
 
     public String moveControl(
             String formId,
@@ -177,11 +152,6 @@ public class FormAIActionService {
                 }
                 """;
     }
-
-
-    // =========================================================
-    // RESIZE
-    // =========================================================
 
     public String resizeControl(
             String formId,
@@ -227,11 +197,6 @@ public class FormAIActionService {
                 """;
     }
 
-
-    // =========================================================
-    // UPDATE LABEL
-    // =========================================================
-
     public String updateLabel(
             String formId,
             String controlId,
@@ -266,11 +231,6 @@ public class FormAIActionService {
                 }
                 """;
     }
-
-
-    // =========================================================
-    // UPDATE STYLE
-    // =========================================================
 
     public String updateStyle(
             String formId,
@@ -321,11 +281,6 @@ public class FormAIActionService {
                 }
                 """;
     }
-
-
-    // =========================================================
-    // ADD CONTROL
-    // =========================================================
 
     public String addControl(
             String formId,
@@ -417,10 +372,6 @@ public class FormAIActionService {
     }
 
 
-    // =========================================================
-    // DELETE CONTROL
-    // =========================================================
-
     public String deleteControl(
             String formId,
             String controlId
@@ -471,11 +422,6 @@ public class FormAIActionService {
                 }
                 """;
     }
-
-
-    // =========================================================
-    // CREATE NEW FORM
-    // =========================================================
 
     @Transactional
     public Form createFormFromAI(String formData) throws Exception {
@@ -580,10 +526,6 @@ public class FormAIActionService {
     }
 
 
-    // =========================================================
-    // DEFAULT DATABASE CONFIG
-    // =========================================================
-
     private void createDefaultDatabaseConfig(
             String formId
     ) {
@@ -655,21 +597,12 @@ public class FormAIActionService {
         return db;
     }
 
-
-    // =========================================================
-    // DELETE ENTIRE FORM
-    // =========================================================
-
     @Transactional
     public String deleteForm(
             String formId
     ) throws Exception {
 
         Form form = getForm(formId);
-
-        // -----------------------------------------------------
-        // 1. Drop dynamic response table
-        // -----------------------------------------------------
 
         FormDatabaseConfig config =
                 databaseConfigRepository
@@ -684,16 +617,9 @@ public class FormAIActionService {
             );
         }
 
-        // -----------------------------------------------------
-        // 2. Delete database configuration
-        // -----------------------------------------------------
-
         databaseConfigRepository
                 .deleteByFormId(formId);
 
-        // -----------------------------------------------------
-        // 3. Delete generated link file
-        // -----------------------------------------------------
 
         Path linkFile =
                 Paths.get(
@@ -706,10 +632,6 @@ public class FormAIActionService {
                 linkFile
         );
 
-        // -----------------------------------------------------
-        // 4. Delete form
-        // -----------------------------------------------------
-
         formRepository.deleteById(formId);
 
         return """
@@ -719,11 +641,6 @@ public class FormAIActionService {
                 }
                 """;
     }
-
-
-    // =========================================================
-    // DROP RESPONSE TABLE
-    // =========================================================
 
     private void dropResponseTable(
             String formId,

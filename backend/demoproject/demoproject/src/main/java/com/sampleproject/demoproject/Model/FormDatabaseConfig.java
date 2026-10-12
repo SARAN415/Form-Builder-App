@@ -5,14 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 //import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Table;
-//import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "form_database_config")
 public class FormDatabaseConfig {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "form_id", nullable = false)
