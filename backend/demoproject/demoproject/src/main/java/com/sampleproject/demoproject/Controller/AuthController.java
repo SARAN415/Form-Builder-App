@@ -33,11 +33,6 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
-
-    // =================================================
-    // SIGNUP
-    // =================================================
-
     @PostMapping("/signup")
     public ResponseEntity<?> signup(
             @RequestBody SignupRequest request
@@ -61,11 +56,6 @@ public class AuthController {
                     );
         }
     }
-
-
-    // =================================================
-    // LOGIN
-    // =================================================
 
     @PostMapping("/login")
     public ResponseEntity<?> login(
@@ -106,11 +96,6 @@ public class AuthController {
         }
     }
 
-
-    // =================================================
-    // VERIFY OTP
-    // =================================================
-
     @PostMapping("/verify-otp")
     public ResponseEntity<?> verifyOtp(
             @RequestBody OTPRequest request
@@ -136,11 +121,6 @@ public class AuthController {
                     );
         }
     }
-
-
-    // =================================================
-    // RESEND OTP
-    // =================================================
 
     @PostMapping("/resend-otp")
     public ResponseEntity<?> resendOtp(
@@ -169,11 +149,6 @@ public class AuthController {
                     );
         }
     }
-
-
-    // =================================================
-    // CURRENT USER
-    // =================================================
 
     @GetMapping("/me")
     public ResponseEntity<?> getCurrentUser(
