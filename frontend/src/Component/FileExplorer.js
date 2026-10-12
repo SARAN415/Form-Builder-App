@@ -26,9 +26,6 @@ function FileExplorer({
         useState({});
 
 
-    // =========================================
-    // Get all files
-    // =========================================
 
     useEffect(() => {
 
@@ -96,26 +93,16 @@ function FileExplorer({
     }, []);
 
 
-    // =========================================
-    // Group files by formId
-    // =========================================
 
     const groupedFiles = files.reduce(
     (forms, file) => {
 
-        // ===============================
-        // Create form folder
-        // ===============================
 
         if (!forms[file.formId]) {
 
             forms[file.formId] = {};
         }
 
-
-        // ===============================
-        // Create response folder
-        // ===============================
 
         if (
             !forms[file.formId][
@@ -128,10 +115,6 @@ function FileExplorer({
             ] = [];
         }
 
-
-        // ===============================
-        // Add file
-        // ===============================
 
         if (!forms[file.formId]) {
             forms[file.formId] = {};
@@ -159,11 +142,6 @@ function FileExplorer({
     },
     {}
 );
-
-
-    // =========================================
-    // Expand / Collapse folder
-    // =========================================
 
     const toggleFolder = (
         formId
@@ -199,10 +177,6 @@ function FileExplorer({
     }));
 };
 
-
-    // =========================================
-    // Open file
-    // =========================================
 
 const openFile = async (fileId) => {
 
@@ -268,10 +242,6 @@ const openFile = async (fileId) => {
 };
 
 
-    // =========================================
-    // File icon
-    // =========================================
-
     const getFileIcon = (
         contentType
     ) => {
@@ -324,10 +294,6 @@ const openFile = async (fileId) => {
         <div className="file-explorer">
 
 
-            {/* ================================= */}
-            {/* HEADER */}
-            {/* ================================= */}
-
             <div className="file-explorer-header">
 
                 <span>
@@ -344,10 +310,6 @@ const openFile = async (fileId) => {
 
             </div>
 
-
-            {/* ================================= */}
-            {/* BODY */}
-            {/* ================================= */}
 
             <div className="file-explorer-body">
 
@@ -390,218 +352,200 @@ const openFile = async (fileId) => {
                     )}
 
 
-                {/* ================================= */}
-                {/* FORM FOLDERS */}
-                {/* ================================= */}
-
                 {!loading &&
                     !error &&
 
                     Object.entries(
-    groupedFiles
-).map(
-    ([formId, responses]) => (
-
-        <div
-            key={formId}
-            className="form-folder"
-        >
-
-            {/* ============================= */}
-            {/* FORM FOLDER */}
-            {/* ============================= */}
-
-            <div
-                className="folder-item"
-                onClick={() =>
-                    toggleFolder(formId)
-                }
-            >
-
-                <span className="folder-icon">
-
-                    {
-                        expandedForms[
-                            formId
-                        ]
-                            ? "📂"
-                            : "📁"
-                    }
-
-                </span>
-
-
-                <span className="folder-name">
-
-                    {formId}
-
-                </span>
-
-            </div>
-
-
-            {/* ============================= */}
-            {/* RESPONSE FOLDERS */}
-            {/* ============================= */}
-
-            {expandedForms[
-                formId
-            ] && (
-
-                <div className="folder-files">
-
-                    {Object.entries(
-                        responses
+                        groupedFiles
                     ).map(
-                        (
-                            [
-                                responseId,
-                                responseFiles
-                            ]
-                        ) => {
+                        ([formId, responses]) => (
 
-                            const responseKey =
-                                `${formId}_${responseId}`;
+                            <div
+                                key={formId}
+                                className="form-folder"
+                            >
 
-
-                            return (
 
                                 <div
-                                    key={
-                                        responseId
+                                    className="folder-item"
+                                    onClick={() =>
+                                        toggleFolder(formId)
                                     }
                                 >
 
-                                    {/* ======================= */}
-                                    {/* RESPONSE FOLDER */}
-                                    {/* ======================= */}
+                                    <span className="folder-icon">
 
-                                    <div
-                                        className="folder-item response-folder"
-
-                                        onClick={() =>
-                                            toggleResponse(
-                                                formId,
-                                                responseId
-                                            )
+                                        {
+                                            expandedForms[
+                                                formId
+                                            ]
+                                                ? "📂"
+                                                : "📁"
                                         }
-                                    >
 
-                                        <span
-                                            className="folder-icon"
-                                        >
-
-                                            {
-                                                expandedResponses[
-                                                    responseKey
-                                                ]
-                                                    ? "📂"
-                                                    : "📁"
-                                            }
-
-                                        </span>
+                                    </span>
 
 
-                                        <span
-                                            className="folder-name"
-                                        >
+                                    <span className="folder-name">
 
-                                            {responseId}
+                                        {formId}
 
-                                        </span>
-
-                                    </div>
-
-
-                                    {/* ======================= */}
-                                    {/* FILES */}
-                                    {/* ======================= */}
-
-                                    {
-                                        expandedResponses[
-                                            responseKey
-                                        ] && (
-
-                                            <div className="response-files">
-
-                                                {
-                                                    responseFiles.map(
-                                                        file => (
-
-                                                            <div
-                                                                key={
-                                                                    file.fileId
-                                                                }
-
-                                                                className="file-item"
-
-                                                                onDoubleClick={() =>
-                                                                    openFile(
-                                                                        file.fileId
-                                                                    )
-                                                                }
-                                                            >
-
-                                                                <span className="file-icon">
-
-                                                                    {
-                                                                        getFileIcon(
-                                                                            file.contentType
-                                                                        )
-                                                                    }
-
-                                                                </span>
-
-
-                                                                <div className="file-details">
-
-                                                                    <div className="file-name">
-
-                                                                        {
-                                                                            file.fileName
-                                                                        }
-
-                                                                    </div>
-
-
-                                                                    <div className="file-label">
-
-                                                                        Field:
-                                                                        {" "}
-                                                                        {
-                                                                            file.label
-                                                                        }
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        )
-                                                    )
-                                                }
-
-                                            </div>
-
-                                        )
-                                    }
+                                    </span>
 
                                 </div>
 
-                            );
 
-                        }
-                    )}
+                                {expandedForms[
+                                    formId
+                                ] && (
 
-                </div>
+                                    <div className="folder-files">
 
-            )}
+                                        {Object.entries(
+                                            responses
+                                        ).map(
+                                            (
+                                                [
+                                                    responseId,
+                                                    responseFiles
+                                                ]
+                                            ) => {
 
-        </div>
+                                                const responseKey =
+                                                    `${formId}_${responseId}`;
 
-    )
-)
+
+                                                return (
+
+                                                    <div
+                                                        key={
+                                                            responseId
+                                                        }
+                                                    >
+
+
+                                                        <div
+                                                            className="folder-item response-folder"
+
+                                                            onClick={() =>
+                                                                toggleResponse(
+                                                                    formId,
+                                                                    responseId
+                                                                )
+                                                            }
+                                                        >
+
+                                                            <span
+                                                                className="folder-icon"
+                                                            >
+
+                                                                {
+                                                                    expandedResponses[
+                                                                        responseKey
+                                                                    ]
+                                                                        ? "📂"
+                                                                        : "📁"
+                                                                }
+
+                                                            </span>
+
+
+                                                            <span
+                                                                className="folder-name"
+                                                            >
+
+                                                                {responseId}
+
+                                                            </span>
+
+                                                        </div>
+
+
+                                                        {
+                                                            expandedResponses[
+                                                                responseKey
+                                                            ] && (
+
+                                                                <div className="response-files">
+
+                                                                    {
+                                                                        responseFiles.map(
+                                                                            file => (
+
+                                                                                <div
+                                                                                    key={
+                                                                                        file.fileId
+                                                                                    }
+
+                                                                                    className="file-item"
+
+                                                                                    onDoubleClick={() =>
+                                                                                        openFile(
+                                                                                            file.fileId
+                                                                                        )
+                                                                                    }
+                                                                                >
+
+                                                                                    <span className="file-icon">
+
+                                                                                        {
+                                                                                            getFileIcon(
+                                                                                                file.contentType
+                                                                                            )
+                                                                                        }
+
+                                                                                    </span>
+
+
+                                                                                    <div className="file-details">
+
+                                                                                        <div className="file-name">
+
+                                                                                            {
+                                                                                                file.fileName
+                                                                                            }
+
+                                                                                        </div>
+
+
+                                                                                        <div className="file-label">
+
+                                                                                            Field:
+                                                                                            {" "}
+                                                                                            {
+                                                                                                file.label
+                                                                                            }
+
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                            )
+                                                                        )
+                                                                    }
+
+                                                                </div>
+
+                                                            )
+                                                        }
+
+                                                    </div>
+
+                                                );
+
+                                            }
+                                        )}
+
+                                    </div>
+
+                                )}
+
+                            </div>
+
+                        )
+                    )
                 }
 
             </div>

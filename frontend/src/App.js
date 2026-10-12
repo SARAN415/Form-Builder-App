@@ -78,10 +78,6 @@ export default function App() {
                         element={<FormBuilder />}
                     />
 
-                    {/* <Route
-                        path="/form/:id/:formData"
-                        element={<PublicForm showAlert={showAlert}/>}
-                    /> */}
                     <Route
                         path="/public-form/:token"
                         element={<PublicForm showAlert={showAlert}/>}

@@ -103,68 +103,6 @@ function PublicForm(
         );
     }
 
-    // const copyCode = async () => {
-
-    //     try {
-
-    //         const publicFormUrl = new URL(
-    //             window.location.href
-    //         );
-
-    //         const [componentResponse, styleResponse] = await Promise.all([
-    //             fetch(new URL(
-    //                 "/source/PublicForm.js?v=react-source",
-    //                 publicFormUrl
-    //             )),
-    //             fetch(new URL(
-    //                 "/source/PublicForm.css?v=react-source",
-    //                 publicFormUrl
-    //             ))
-    //         ]);
-
-    //         if (!componentResponse.ok || !styleResponse.ok) {
-    //             throw new Error("Source files could not be loaded");
-    //         }
-
-    //         const componentCode = await componentResponse.text();
-    //         const styleCode = await styleResponse.text();
-
-    //         await navigator.clipboard.writeText(
-    //             `${componentCode}\n\n/* PublicForm.css */\n${styleCode}`
-    //         );
-
-    //         showAlert(
-    //             "success",
-    //             "Copied",
-    //             "PublicForm.js and PublicForm.css copied to the clipboard"
-    //         );
-
-    //     } catch (error) {
-
-    //         console.error("COPY FORM CODE ERROR:", error);
-
-    //         showAlert(
-    //             "error",
-    //             "Error",
-    //             "Unable to load the current React source files. Restart the development server and try again."
-    //         );
-    //     }
-    // };
-
-    // const parsedFormData =
-    //     JSON.parse(
-    //         decodeURIComponent(
-    //             formData
-    //         )
-    //     );
-    
-    // const container = parsedFormData.container;
-
-    // const controls = Array.isArray(
-    //     parsedFormData.controls
-    // )
-    //     ? parsedFormData.controls
-    //     : [];
     if (loading) {
     return <div>Loading form...</div>;
 }
@@ -242,9 +180,6 @@ const controls = Array.isArray(parsedFormData.controls)
 
             for (const item of controls) {
 
-                // ==============================
-                // Checkbox
-                // ==============================
 
                 if (item.type === "checkbox") {
 
@@ -368,13 +303,6 @@ const controls = Array.isArray(parsedFormData.controls)
 
         <div className="public-form-page">
 
-            {/* <button
-                type="button"
-                className="public-form-copy-button"
-                onClick={copyCode}
-            >
-                Copy Code
-            </button> */}
             <button
                 type="button"
                 className="public-form-copy-button"

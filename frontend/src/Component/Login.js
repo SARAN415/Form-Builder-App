@@ -32,9 +32,6 @@ function Login() {
         useState(false);
 
 
-    // =========================================
-    // Message received after signup
-    // =========================================
 
     React.useEffect(() => {
 
@@ -55,40 +52,6 @@ function Login() {
 
     }, [location]);
 
-
-    // =========================================
-    // Validate
-    // =========================================
-
-    // const validateLogin = () => {
-
-    //     if (!email.trim()) {
-
-    //         setError(
-    //             "Please enter your email or username."
-    //         );
-
-    //         return false;
-    //     }
-
-
-    //     if (!password) {
-
-    //         setError(
-    //             "Please enter your password."
-    //         );
-
-    //         return false;
-    //     }
-
-
-    //     return true;
-    // };
-
-
-    // =========================================
-    // Login
-    // =========================================
 
     const handleLogin = async (e) => {
 
@@ -173,31 +136,17 @@ function Login() {
 };
 
 
-    // =========================================
-    // Google Login
-    // =========================================
-
     const handleGoogleLogin = () => {
 
         window.location.href =
             "http://localhost:8080/oauth2/authorization/google";
     };
 
-
-    // =========================================
-    // UI
-    // =========================================
-
     return (
 
         <div className="login-page">
 
             <div className="login-card">
-
-
-                {/* =================================
-                    Brand
-                ================================== */}
 
                 <div className="login-brand">
 
@@ -211,11 +160,6 @@ function Login() {
 
                 </div>
 
-
-                {/* =================================
-                    Heading
-                ================================== */}
-
                 <h1>
                     Welcome back
                 </h1>
@@ -226,17 +170,10 @@ function Login() {
                 </p>
 
 
-                {/* =================================
-                    Login Form
-                ================================== */}
-
                 <form
                     className="login-form"
                     onSubmit={handleLogin}
                 >
-
-
-                    {/* Email */}
 
                     <div className="login-form-group">
 
@@ -271,8 +208,6 @@ function Login() {
 
                     </div>
 
-
-                    {/* Password */}
 
                     <div className="login-form-group">
 
@@ -329,8 +264,6 @@ function Login() {
                     </div>
 
 
-                    {/* Forgot password */}
-
                     <div className="login-forgot-row">
 
                         <button
@@ -348,8 +281,6 @@ function Login() {
                     </div>
 
 
-                    {/* Error */}
-
                     {error && (
 
                         <div className="login-error">
@@ -359,8 +290,6 @@ function Login() {
                     )}
 
 
-                    {/* Success */}
-
                     {success && (
 
                         <div className="auth-success">
@@ -369,8 +298,6 @@ function Login() {
 
                     )}
 
-
-                    {/* Login */}
 
                     <button
                         type="submit"
@@ -385,14 +312,9 @@ function Login() {
                     </button>
 
 
-                    {/* Divider */}
-
                     <div className="login-divider">
                         OR
                     </div>
-
-
-                    {/* Google */}
 
                     <button
                         type="button"
@@ -410,8 +332,6 @@ function Login() {
 
                 </form>
 
-
-                {/* Signup */}
 
                 <p className="login-signup-text">
 

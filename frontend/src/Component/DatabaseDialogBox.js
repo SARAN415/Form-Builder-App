@@ -259,14 +259,7 @@ function DatabaseDialogBox({
                             <select
                                 className="database-control"
                                 value={databaseConfig.databaseType}
-                                // onChange={(e) => {
-                                //     const databaseType = e.target.value;
-
-                                //     setDatabaseConfig(prev => ({
-                                //         ...prev,
-                                //         databaseType: databaseType
-                                //     }));
-                                // }}
+                                
                                 onChange={
                                     handleDatabaseTypeChange
                                 }
@@ -479,7 +472,6 @@ function DatabaseDialogBox({
 
                         </div>
 
-                        {/* CONNECTION ERROR */}
 
                         {errors.connection && (
 
@@ -498,9 +490,7 @@ function DatabaseDialogBox({
 
                         <button
                             className="database-cancel-button"
-                            // onClick={() =>
-                            //     setShowDatabaseDialog(false)
-                            // }
+                            
                             onClick={onClose}
                         >
                             Cancel
@@ -508,7 +498,7 @@ function DatabaseDialogBox({
 
                         <button
                             className="database-test-button"
-                            //disabled={testing}
+                            
                             onClick={testConnection}
                         >
 

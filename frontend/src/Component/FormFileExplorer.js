@@ -10,9 +10,6 @@ const FormFileExplorer = ({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // =====================================================
-    // LOAD FORMS FROM forms TABLE
-    // =====================================================
 
     const loadForms = async () => {
         try {
@@ -69,18 +66,10 @@ const FormFileExplorer = ({
     };
 
 
-    // =====================================================
-    // LOAD WHEN COMPONENT OPENS
-    // =====================================================
-
     useEffect(() => {
         loadForms();
     }, []);
 
-
-    // =====================================================
-    // SEARCH
-    // =====================================================
 
     const filteredForms = forms.filter(
         (form) => {
@@ -98,10 +87,6 @@ const FormFileExplorer = ({
         }
     );
 
-
-    // =====================================================
-    // DATE FORMAT
-    // =====================================================
 
     const formatDate = (value) => {
 
@@ -124,19 +109,6 @@ const FormFileExplorer = ({
             "en-GB"
         );
     };
-
-
-    // =====================================================
-    // OPEN FORM
-    // =====================================================
-
-    // const handleOpenForm = (form) => {
-
-    //     if (onOpenForm) {
-    //         onOpenForm(form);
-    //     }
-
-    // };
 
     const copyLink = async (formId) => {
 
@@ -188,11 +160,6 @@ const FormFileExplorer = ({
         }
     };
 
-
-    // =====================================================
-    // UI
-    // =====================================================
-
     return (
         <div className="form-file-explorer">
 
@@ -201,14 +168,6 @@ const FormFileExplorer = ({
             <div className="form-explorer-header">
 
                 <div className="form-header-left">
-
-                    {/* <button
-                        className="form-back-button"
-                        onClick={onBack}
-                        title="Back"
-                    >
-                        ←
-                    </button> */}
 
                     <span className="form-folder-icon">
                         📁
@@ -246,14 +205,10 @@ const FormFileExplorer = ({
             </div>
 
 
-            {/* BREADCRUMB */}
-
             <div className="form-breadcrumb">
                 Database / Forms
             </div>
 
-
-            {/* SEARCH */}
 
             <div className="form-search-row">
 
@@ -290,11 +245,8 @@ const FormFileExplorer = ({
             </div>
 
 
-            {/* LIST */}
-
             <div className="form-list-container">
 
-                {/* COLUMN HEADER */}
 
                 <div className="form-list-header">
 
@@ -324,16 +276,12 @@ const FormFileExplorer = ({
                 </div>
 
 
-                {/* LOADING */}
-
                 {loading && (
                     <div className="form-status">
                         Loading forms...
                     </div>
                 )}
 
-
-                {/* ERROR */}
 
                 {!loading && error && (
                     <div className="form-status">
@@ -353,8 +301,6 @@ const FormFileExplorer = ({
                 )}
 
 
-                {/* EMPTY */}
-
                 {!loading &&
                     !error &&
                     filteredForms.length === 0 && (
@@ -368,8 +314,6 @@ const FormFileExplorer = ({
                         </div>
                     )}
 
-
-                {/* FORM ROWS */}
 
                 {!loading &&
                     !error &&
@@ -385,14 +329,8 @@ const FormFileExplorer = ({
                                 <div
                                     key={form.id}
                                     className="form-list-row"
-                                    // onDoubleClick={() =>
-                                    //     handleOpenForm(
-                                    //         form
-                                    //     )
-                                    // }
+                                    
                                 >
-
-                                    {/* NAME */}
 
                                     <div className="form-name-column">
 
@@ -406,24 +344,15 @@ const FormFileExplorer = ({
 
                                     </div>
 
-
-                                    {/* ID */}
-
                                     <div className="form-id-column">
                                         {form.id}
                                     </div>
-
-
-                                    {/* UPDATED */}
 
                                     <div className="form-updated-column">
                                         {formatDate(
                                             form.createdAt
                                         )}
                                     </div>
-
-
-                                    {/* ACTION */}
 
                                     <div className="form-action-column">
 

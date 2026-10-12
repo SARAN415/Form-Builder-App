@@ -24,26 +24,14 @@ function OTPVerification() {
         useLocation();
 
 
-    // =========================================
-    // AuthSession
-    // =========================================
-
     const {
         login, checkAuthentication
     } = useAuth();
 
 
-    // =========================================
-    // Email from Login
-    // =========================================
-
     const email =
         location.state?.email || "";
 
-
-    // =========================================
-    // States
-    // =========================================
 
     const [otp, setOtp] =
         useState("");
@@ -64,10 +52,6 @@ function OTPVerification() {
         useState(60);
 
 
-    // =========================================
-    // Check email
-    // =========================================
-
     useEffect(() => {
 
         if (!email) {
@@ -85,10 +69,6 @@ function OTPVerification() {
         navigate
     ]);
 
-
-    // =========================================
-    // Countdown
-    // =========================================
 
     useEffect(() => {
 
@@ -120,10 +100,6 @@ function OTPVerification() {
     ]);
 
 
-    // =========================================
-    // OTP input
-    // =========================================
-
     const handleOtpChange = (e) => {
 
         const value =
@@ -154,10 +130,6 @@ function OTPVerification() {
     };
 
 
-    // =========================================
-    // Verify OTP
-    // =========================================
-
     const handleVerifyOtp = async (e) => {
 
         e.preventDefault();
@@ -166,10 +138,6 @@ function OTPVerification() {
 
         setSuccess("");
 
-
-        // -----------------------------------------
-        // Validation
-        // -----------------------------------------
 
         if (!otp) {
 
@@ -224,10 +192,6 @@ function OTPVerification() {
                 await response.json();
 
 
-            // -----------------------------------------
-            // Invalid OTP
-            // -----------------------------------------
-
             if (!response.ok) {
 
                 setError(
@@ -239,10 +203,6 @@ function OTPVerification() {
             }
 
 
-            // -----------------------------------------
-            // JWT missing
-            // -----------------------------------------
-
             if (!result.accessToken) {
 
                 setError(
@@ -253,10 +213,6 @@ function OTPVerification() {
             }
 
 
-            // -----------------------------------------
-            // Save JWT through AuthSession
-            // -----------------------------------------
-
             login(
                 result.accessToken,
                 result.user
@@ -264,10 +220,6 @@ function OTPVerification() {
 
             await checkAuthentication();
 
-
-            // -----------------------------------------
-            // Go to FormBuilder
-            // -----------------------------------------
 
             navigate(
                 "/",
@@ -295,10 +247,6 @@ function OTPVerification() {
         }
     };
 
-
-    // =========================================
-    // Resend OTP
-    // =========================================
 
     const handleResendOtp = async () => {
 
@@ -382,10 +330,6 @@ function OTPVerification() {
     };
 
 
-    // =========================================
-    // Back to Login
-    // =========================================
-
     const handleBackToLogin = () => {
 
         navigate(
@@ -397,20 +341,11 @@ function OTPVerification() {
     };
 
 
-    // =========================================
-    // UI
-    // =========================================
-
     return (
 
         <div className="otp-page">
 
             <div className="otp-card">
-
-
-                {/* =================================
-                    Brand
-                ================================== */}
 
                 <div className="otp-brand">
 
@@ -423,11 +358,6 @@ function OTPVerification() {
                     </span>
 
                 </div>
-
-
-                {/* =================================
-                    Heading
-                ================================== */}
 
                 <h1>
                     Verify your email
@@ -445,11 +375,6 @@ function OTPVerification() {
                     </strong>
 
                 </p>
-
-
-                {/* =================================
-                    OTP Form
-                ================================== */}
 
                 <form
                     onSubmit={
@@ -521,10 +446,6 @@ function OTPVerification() {
                 </form>
 
 
-                {/* =================================
-                    Resend OTP
-                ================================== */}
-
                 <div className="otp-resend">
 
                     {countdown > 0 ? (
@@ -558,11 +479,6 @@ function OTPVerification() {
                     )}
 
                 </div>
-
-
-                {/* =================================
-                    Back
-                ================================== */}
 
                 <button
                     type="button"

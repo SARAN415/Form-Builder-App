@@ -454,15 +454,6 @@ function Toolbar({
 
             )}
 
-            {/* {status === "authenticated" && (
-                <button
-                    className="toolbar-logout"
-                    onClick={logout}
-                >
-                    ⇥ Logout
-                </button>
-            )} */}
-
             {status === "authenticated" && user && (
 
     <div className="profile-menu-container">
@@ -511,7 +502,6 @@ function Toolbar({
                 <button
                     onClick={() => {
                         setShowFormFileExplorer(true)
-                        //navigate("/my-forms");
                     }}
                 >
                     <span>📁</span>
@@ -522,7 +512,6 @@ function Toolbar({
                 <button
                     onClick={() => {
                         setShowFileExplorer(true)
-                        //navigate("/my-form-responses");
                     }}
                 >
                     <span>📊</span>

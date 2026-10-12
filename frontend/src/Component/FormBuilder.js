@@ -66,20 +66,6 @@ export default function FormBuilder() {
 
     const [formInfo, setFormInfo]=useState([])
 
-    // const showAlert = (
-    //     type,
-    //     title,
-    //     message,
-    // ) => {
-
-    //     setAlert({
-    //         show: true,
-    //         type,
-    //         title,
-    //         message
-    //     });
-
-    // };
     const showAlert = useCallback(
         (
             type,
@@ -127,10 +113,6 @@ export default function FormBuilder() {
         id,
         containerId = null
     ) => {
-
-        // ==========================================
-        // FORM CONTAINER
-        // ==========================================
 
         if (
             aiControl.input ===
@@ -184,10 +166,6 @@ export default function FormBuilder() {
 
         }
 
-
-        // ==========================================
-        // NORMAL CONTROL
-        // ==========================================
 
         return {
 
@@ -308,10 +286,6 @@ export default function FormBuilder() {
                     : [];
 
 
-            // =================================================
-            // CREATE
-            // =================================================
-
             if (action === "CREATE") {
 
                 if (
@@ -328,13 +302,6 @@ export default function FormBuilder() {
                     );
 
 
-                /*
-                * First create containers.
-                *
-                * This is important because child
-                * controls may need the newly-created
-                * container ID.
-                */
 
                 const containerControls =
                     aiControls.filter(
@@ -365,14 +332,6 @@ export default function FormBuilder() {
                     );
 
 
-                /*
-                * If AI explicitly gave containerId,
-                * keep it.
-                *
-                * If it did not, assign the newly
-                * created container intelligently.
-                */
-
                 const firstNewContainer =
                     createdContainers[0];
 
@@ -384,11 +343,6 @@ export default function FormBuilder() {
                             let containerId =
                                 item.containerId;
 
-
-                            /*
-                            * If AI gave a container ID
-                            * that already exists, keep it.
-                            */
 
                             const existingContainer =
                                 controls.find(
@@ -408,25 +362,12 @@ export default function FormBuilder() {
                                 !existingContainer
                             ) {
 
-                                /*
-                                * If there is a newly
-                                * created container,
-                                * use it.
-                                */
 
                                 if (
                                     createdContainers.length >
                                     0
                                 ) {
 
-                                    /*
-                                    * If multiple
-                                    * containers were
-                                    * created, distribute
-                                    * controls between
-                                    * them when AI
-                                    * supplied an index.
-                                    */
 
                                     if (
                                         item.containerIndex !=
@@ -454,12 +395,6 @@ export default function FormBuilder() {
                                     }
 
                                 } else {
-
-                                    /*
-                                    * No new container.
-                                    * Use currently selected
-                                    * container.
-                                    */
 
                                     const selectedContainer =
                                         selectedRef.current.find(
@@ -509,11 +444,6 @@ export default function FormBuilder() {
                     newControls
                 );
 
-
-                /*
-                * Select everything AI created.
-                */
-
                 updateSelection(
                     allCreatedControls
                 );
@@ -528,10 +458,6 @@ export default function FormBuilder() {
                 return;
             }
 
-
-            // =================================================
-            // UPDATE
-            // =================================================
 
             if (action === "UPDATE") {
 
@@ -572,14 +498,6 @@ export default function FormBuilder() {
                             }
 
 
-                            /*
-                            * IMPORTANT:
-                            *
-                            * Never replace the ID.
-                            *
-                            * Never create a new control.
-                            */
-
                             return {
 
                                 ...control,
@@ -599,10 +517,6 @@ export default function FormBuilder() {
                     updatedControls
                 );
 
-
-                /*
-                * Select the updated controls.
-                */
 
                 const updatedSelected =
                     updatedControls.filter(
@@ -640,10 +554,6 @@ export default function FormBuilder() {
                 return;
             }
 
-
-            // =================================================
-            // SELECT
-            // =================================================
 
             if (action === "SELECT") {
 
@@ -783,7 +693,6 @@ export default function FormBuilder() {
         ]);
 
         setRedoHistory([]);
-        //setControls(newControls);
 
     };
 
@@ -990,25 +899,6 @@ export default function FormBuilder() {
         input.click();
     };
 
-//   const exportPNG = async () => {
-
-//       if (!exportRef.current) {
-//           console.log("Playground not found");
-//           return;
-//       }
-//       console.log(exportRef);
-//       const canvas = await html2canvas(exportRef.current);
-
-//       const image = canvas.toDataURL("image/png");
-
-//       const link = document.createElement("a");
-
-//       link.href = image;
-//       link.download = "form-design.png";
-
-//       link.click();
-//   };
-
     const exportPNG = async () => {
 
         if (!playgroundRef.current) {
@@ -1148,112 +1038,6 @@ export default function FormBuilder() {
 
     };
 
-    // const saveDatabaseConfig = async () => {
-
-    //     try {
-
-    //         const token = localStorage.getItem("accessToken");
-
-    //         const response = await fetch(
-    //             "http://localhost:8080/api/forms",
-    //             {
-    //                 method: "POST",
-
-    //                  headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${token}`
-    //                 },
-
-    //                 body: JSON.stringify({
-
-    //                     database:
-    //                         databaseConfig
-
-    //                 })
-    //             }
-    //         );
-
-
-    //         if (!response.ok) {
-
-    //             const errorText =
-    //                 await response.text();
-
-    //             console.error(
-    //                 "CREATE FORM ERROR:",
-    //                 response.status,
-    //                 errorText
-    //             );
-
-    //             showAlert(
-    //                 "error",
-    //                 "Error",
-    //                 "Failed to create form link"
-    //             );
-
-    //             return;
-    //         }
-
-
-    //         const data =
-    //             await response.json();
-
-    //         console.log("Form created:", data);
-
-            
-    //         const encodedFormData =
-    //             encodeURIComponent(
-    //                 JSON.stringify(formInfo)
-    //             );
-
-
-    //         const link =
-    //             `${window.location.origin}/form/${data.id}/${encodedFormData}`;
-
-
-    //         await navigator.clipboard.writeText(
-    //             link
-    //         );
-
-    //         // Save the link as {formId}.txt
-    //         const responses = await fetch(
-    //             `http://localhost:8080/api/forms/${data.id}/generate-link`,
-    //             {
-    //                 method: "POST",
-    //                 headers: {
-    //                     "Content-Type": "application/json",
-    //                     Authorization: `Bearer ${token}`
-    //                 },
-    //                 body: JSON.stringify({
-    //                     link: link
-    //                 })
-    //             }
-    //         );
-
-    //         if (!responses.ok) {
-    //             // throw new Error(
-    //             //     "Unable to save form link"
-    //             // );
-    //             showAlert("error","Error","Unable to save form link");
-    //         }
-
-
-    //         setShowDatabaseDialog(false);
-
-
-    //         showAlert("success","Success","Form link created and copied to the clipboard successfully");
-
-
-    //     } catch (error) {
-
-    //         console.error(error);
-
-    //         showAlert("error","Error","Unable to generate form link");
-
-    //     }
-
-    // };
-
     const saveDatabaseConfig = async () => {
     try {
         const token = localStorage.getItem("accessToken");
@@ -1325,13 +1109,13 @@ export default function FormBuilder() {
 
         // 4. Generate iframe code
         const iframeCode =
-`<iframe
-    src="${link}"
-    width="100%"
-    height="600"
-    style="border: none;"
-    title="Public Form">
-</iframe>`;
+            `<iframe
+                src="${link}"
+                width="100%"
+                height="600"
+                style="border: none;"
+                title="Public Form">
+            </iframe>`;
 
 
         console.log("Iframe code:", iframeCode);

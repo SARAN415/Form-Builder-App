@@ -42,10 +42,6 @@ function Signup() {
         useState(false);
 
 
-    // =========================================
-    // Validation
-    // =========================================
-
     const validateForm = () => {
 
         if (!username.trim()) {
@@ -135,10 +131,6 @@ function Signup() {
     };
 
 
-    // =========================================
-    // Signup
-    // =========================================
-
     const handleSignup = async (e) => {
 
         e.preventDefault();
@@ -199,14 +191,6 @@ function Signup() {
             }
 
 
-            /*
-             * Signup completed.
-             *
-             * Do not create JWT here.
-             *
-             * Go to Login.
-             */
-
             navigate(
                 "/login",
                 {
@@ -237,20 +221,11 @@ function Signup() {
     };
 
 
-    // =========================================
-    // UI
-    // =========================================
-
     return (
 
         <div className="signup-page">
 
             <div className="signup-card">
-
-
-                {/* =================================
-                    Brand
-                ================================== */}
 
                 <div className="signup-brand">
 
@@ -264,11 +239,6 @@ function Signup() {
 
                 </div>
 
-
-                {/* =================================
-                    Heading
-                ================================== */}
-
                 <h1>
                     Create your account
                 </h1>
@@ -278,10 +248,6 @@ function Signup() {
                     Start building forms with FormBuilder
                 </p>
 
-
-                {/* =================================
-                    Signup Form
-                ================================== */}
 
                 <form
                     className="signup-form"

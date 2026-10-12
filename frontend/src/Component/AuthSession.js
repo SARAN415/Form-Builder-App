@@ -8,16 +8,9 @@ import React, {
 } from "react";
 
 
-// =====================================================
-// Authentication Context
-// =====================================================
 
 const AuthContext = createContext(null);
 
-
-// =====================================================
-// JWT Helper Functions
-// =====================================================
 
 function decodeJwtPayload(token) {
 
@@ -59,10 +52,6 @@ function decodeJwtPayload(token) {
     }
 }
 
-
-// =====================================================
-// Check JWT locally
-// =====================================================
 
 function isJwtLocallyValid(token) {
 
@@ -112,41 +101,21 @@ function isJwtLocallyValid(token) {
 }
 
 
-// =====================================================
-// Auth Provider
-// =====================================================
-
 export function AuthProvider({
     children
 }) {
-
-    // -----------------------------------------------
-    // Authentication status
-    // -----------------------------------------------
 
     const [status, setStatus] =
         useState("booting");
 
 
-    // -----------------------------------------------
-    // Current user
-    // -----------------------------------------------
-
     const [user, setUser] =
         useState(null);
 
 
-    // =================================================
-    // Check Authentication
-    // =================================================
-
     const checkAuthentication =
         useCallback(
             async () => {
-
-                // -------------------------------------
-                // Get JWT
-                // -------------------------------------
 
                 const token =
                     localStorage.getItem(
@@ -158,11 +127,6 @@ export function AuthProvider({
                     token
                 );
 
-
-                // -------------------------------------
-                // No token
-                // -------------------------------------
-
                 if (!token) {
 
                     setUser(null);
@@ -173,11 +137,6 @@ export function AuthProvider({
 
                     return;
                 }
-
-
-                // -------------------------------------
-                // Check JWT locally
-                // -------------------------------------
 
                 const valid =
                     isJwtLocallyValid(
@@ -206,10 +165,6 @@ export function AuthProvider({
                 }
 
 
-                // -------------------------------------
-                // Verify JWT with backend
-                // -------------------------------------
-
                 try {
 
                     const response =
@@ -225,10 +180,6 @@ export function AuthProvider({
                             }
                         );
 
-
-                    // ---------------------------------
-                    // Backend rejected token
-                    // ---------------------------------
 
                     if (!response.ok) {
 
@@ -250,10 +201,6 @@ export function AuthProvider({
                         return;
                     }
 
-
-                    // ---------------------------------
-                    // Backend accepted token
-                    // ---------------------------------
 
                     const userData =
                         await response.json();
@@ -292,10 +239,6 @@ export function AuthProvider({
         );
 
 
-    // =================================================
-    // Login
-    // =================================================
-
     const login = (
         accessToken,
         userData
@@ -323,9 +266,6 @@ export function AuthProvider({
         );
     };
 
-    // =================================================
-    // Check authentication when application starts
-    // =================================================
 
     useEffect(() => {
 
@@ -390,10 +330,6 @@ export function AuthProvider({
     }
 
 
-    // =================================================
-    // Logout
-    // =================================================
-
     const logout = useCallback(async() => {
 
         // Remove JWT
@@ -420,10 +356,6 @@ export function AuthProvider({
 
     useAutoLogout(logout);
 
-
-    // =================================================
-    // Context value
-    // =================================================
 
     const contextValue = {
 
@@ -460,10 +392,6 @@ export function AuthProvider({
     };
 
 
-    // =================================================
-    // Provider
-    // =================================================
-
     return (
 
         <AuthContext.Provider
@@ -478,10 +406,6 @@ export function AuthProvider({
     );
 }
 
-
-// =====================================================
-// useAuth Hook
-// =====================================================
 
 export function useAuth() {
 

@@ -965,7 +965,6 @@ function Playground({
 
     return (
 
-        //<div className="playground-container">
         <div
 
             className="playground"
