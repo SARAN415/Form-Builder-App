@@ -1,0 +1,246 @@
+.playground {
+
+scrollbar-width:thin;
+
+scrollbar-color:#34495e #ecf0f1;
+
+flex:1;
+
+border: 2px dotted black;
+
+border-radius: 0;
+
+position:relative;
+
+background:white;
+
+overflow:auto;
+
+min-width:80%;
+
+min-height:100%;
+
+}
+
+/* .playground-container {
+    position: relative;
+
+     width: 100%;
+
+    height: 100%; 
+} */
+
+.playground-content{
+
+position:relative;
+
+}
+
+.playground,.property::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.playground,.property::-webkit-scrollbar-track{
+    background:#ecf0f1;
+    border-radius:10px;
+}
+
+.playground,.property::-webkit-scrollbar-thumb{
+    background:#34495e;
+    border-radius:10px;
+}
+
+.playground,.property::-webkit-scrollbar-thumb:hover{
+    background:#2c3e50;
+}
+
+.playground,.property::-webkit-scrollbar-corner{
+    background:#ecf0f1;
+}
+
+.control{
+display: flex;
+}
+
+.input-selected{
+    border:2px solid black;
+    box-shadow:0px 2px 8px rgba(0,0,0,0.2);
+    border-radius:5px;
+}
+
+.control:hover::after{
+    content: "✥";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: #1976d2;
+    cursor: move;
+}
+
+.control:hover{
+border:1px solid dodgerblue;
+}
+
+.guide-vertical{
+    position:absolute;
+    pointer-events:none;
+    left:50%;
+    top:0;
+    height:100%;
+    border-left:1px dashed #2196f3;
+    transform:translateX(-50%);
+}
+
+.guide-horizontal{
+    position:absolute;
+    pointer-events:none;
+    top:50%;
+    left:0;
+    width:100%;
+    border-top:1px dashed #2196f3;
+    transform:translateY(-50%);
+}
+
+.alignment-guides {
+
+    display: none;
+
+    position: absolute;
+
+    pointer-events: none;
+
+    z-index: 1000;
+
+}
+
+.control:hover .alignment-guides {
+
+    display: block;
+
+}
+
+.guide-top {
+
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    border-top: 1px dotted dodgerblue;
+
+}
+
+.guide-bottom {
+
+    position: absolute;
+
+    left: 0;
+
+    width: 100%;
+
+    border-top: 1px dotted dodgerblue;
+
+}
+
+.guide-left {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 100%;
+
+    border-left: 1px dotted dodgerblue;
+
+}
+
+.guide-right {
+
+    position: absolute;
+
+    top: 0;
+
+    height: 100%;
+
+    border-left: 1px dotted dodgerblue;
+
+}
+
+.login-overlay {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.45);
+
+    z-index: 100;
+}
+
+
+.login-box {
+
+    width: 400px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.login-box h2 {
+
+    margin-bottom: 10px;
+}
+
+
+.login-box p {
+
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+
+.login-box button {
+
+    padding:
+        10px 30px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #2563eb;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}

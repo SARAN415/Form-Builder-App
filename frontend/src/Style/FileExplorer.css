@@ -1,0 +1,368 @@
+/* =========================================
+   FILE EXPLORER
+========================================= */
+
+.file-explorer {
+    position: fixed;
+
+    top: 80px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 650px;
+    height: 500px;
+
+    background: #ffffff;
+
+    border: 1px solid #cfcfcf;
+
+    border-radius: 6px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.18);
+
+    z-index: 1000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    font-family:
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.file-explorer-header {
+
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    background: #f5f5f5;
+
+    border-bottom:
+        1px solid #d8d8d8;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #333;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+========================================= */
+
+.file-explorer-close {
+
+    width: 30px;
+
+    height: 30px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 4px;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    color: #555;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.file-explorer-close:hover {
+
+    background: #e5e5e5;
+
+    color: #000;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+.file-explorer-body {
+
+    flex: 1;
+
+    padding: 10px;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   FORM FOLDER
+========================================= */
+
+.form-folder {
+
+    width: 100%;
+}
+
+
+/* =========================================
+   FOLDER ITEM
+========================================= */
+
+.folder-item {
+
+    display: flex;
+
+    align-items: center;
+
+    height: 36px;
+
+    padding: 0 10px;
+
+    cursor: pointer;
+
+    border-radius: 4px;
+
+    user-select: none;
+
+    color: #333;
+
+    font-size: 14px;
+}
+
+
+.folder-item:hover {
+
+    background: #f0f0f0;
+}
+
+
+/* =========================================
+   FOLDER ICON
+========================================= */
+
+.folder-icon {
+
+    width: 28px;
+
+    font-size: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================
+   FOLDER NAME
+========================================= */
+
+.folder-name {
+
+    font-weight: 500;
+
+    margin-left: 4px;
+}
+
+
+/* =========================================
+   FILES INSIDE FOLDER
+========================================= */
+
+.folder-files {
+
+    margin-left: 30px;
+
+    border-left:
+        1px solid #dddddd;
+
+    padding-left: 8px;
+}
+
+
+/* =========================================
+   FILE ITEM
+========================================= */
+
+.file-item {
+
+    display: flex;
+
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 5px 10px;
+
+    margin: 2px 0;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+
+.file-item:hover {
+
+    background: #f3f3f3;
+}
+
+
+/* =========================================
+   FILE ICON
+========================================= */
+
+.file-icon {
+
+    width: 32px;
+
+    font-size: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================
+   FILE DETAILS
+========================================= */
+
+.file-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+
+    margin-left: 8px;
+}
+
+
+/* =========================================
+   FILE NAME
+========================================= */
+
+.file-name {
+
+    font-size: 14px;
+
+    color: #222;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   FILE LABEL
+========================================= */
+
+.file-label {
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    color: #888;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.file-explorer-message {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.file-explorer-error {
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #c62828;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+.file-explorer-body::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+
+.file-explorer-body::-webkit-scrollbar-track {
+
+    background: #f5f5f5;
+}
+
+
+.file-explorer-body::-webkit-scrollbar-thumb {
+
+    background: #c8c8c8;
+
+    border-radius: 4px;
+}
+
+
+.file-explorer-body::-webkit-scrollbar-thumb:hover {
+
+    background: #a8a8a8;
+}

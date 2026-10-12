@@ -1,0 +1,56 @@
+.embed-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
+}
+
+.embed-modal {
+    width: 90%;
+    max-width: 650px;
+
+    padding: 25px;
+
+    background: white;
+    border-radius: 10px;
+
+    box-sizing: border-box;
+}
+
+.embed-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.embed-modal-header button {
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.embed-modal textarea {
+    width: 100%;
+    margin-top: 15px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    font-family: monospace;
+
+    resize: vertical;
+}
+
+.embed-modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
